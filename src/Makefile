@@ -1,0 +1,12 @@
+CFLAGS=-g -O3
+
+all: ui
+
+uimain.o: tokenizer.h
+charType.o: tokenizer.h
+
+ui: uimain.o charType.o
+	cc -o $@ $^ $(CFLAGS)
+
+clean:
+	rm -f *.o ui
