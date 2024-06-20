@@ -47,7 +47,7 @@ short token_len(char *str)
 
 char *copy_str(char *inStr, short len)
 {
-  char *token = (char*) malloc((len + 1) * sizeof(char));
+  char *token = malloc((len + 1) * sizeof(char));
   for (char i = 0; i < len; i++) {
     char c = *inStr;
     token[i] = c;
@@ -58,7 +58,7 @@ char *copy_str(char *inStr, short len)
 }
 
 char *token_terminator(char *toekn){
-  char *term = (char*) malloc(1 * sizeof(char));
+  char *term = malloc(1 * sizeof(char));
   term[1] = '\0';
   return term;
 }
