@@ -9,25 +9,44 @@ List *init_history()
   return list;
 }
 
+short word_size(char *str)
+{
+  short size = 0;
+  while (str[size] != '\0') {
+    size++;
+  }
+  return size;
+}
+
+char *copy_all_word(char *str)
+{
+  short size = word_size(str);
+  char *copy = malloc((size + 1) * sizeof(char));
+  for (short i = 0; i < size; i++) {
+    copy[i] = *str;
+    str++;
+  }
+  copy[size] = '\0';
+  return copy;
+}
+
 void add_history(List *list, char *str)
 {
-  if(list->root == NULL) {
-    Item *node = malloc(sizeof(Item));
-    node->id = 1;
-    node->str = str;
-    node->next = NULL;
+  int id = 1;
+  Item *node = malloc(sizeof(Item));
+  node->str = copy_all_word(str);
+  node->next = NULL;
+  if (list->root == NULL) {
+    node->id = id;
     list->root = node;
-  }else{
+  } else {
     Item *temp = list->root;
-    char size = 1;
     while (temp->next != NULL) {
+      id++;
       temp = temp->next;
-      size++;
     }
-    Item *node = malloc(sizeof(Item));
-    node->id = size;
-    node->str = str;
-    node->next = NULL;
+    id++;
+    node->id = id;
     temp->next = node;
   }
 }
@@ -38,11 +57,9 @@ void print_history(List *list)
     printf("there is no history at this time\n");
   }else{
     Item *temp = list->root;
-    printf("id:%p", temp);
     while (temp != NULL){
-      printf("id:%d %s", temp->id, *temp->str);
+      printf("id:%d %s", temp->id, temp->str);
       temp = temp->next;
     }
-    printf("id:%d %s", temp->id, *temp->str);
   }
 }
