@@ -63,3 +63,16 @@ void print_history(List *list)
     }
   }
 }
+
+char *get_history(List *list, int id)
+{
+  Item *temp = list->root;
+  while (temp != NULL) {
+    if (temp->id == id) {
+      return temp->str;
+    }
+    temp = temp->next;
+  }
+  printf("could not find id\n");
+  return '\0';
+}
