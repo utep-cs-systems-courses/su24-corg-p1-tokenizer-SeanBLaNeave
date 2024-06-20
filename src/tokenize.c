@@ -26,10 +26,11 @@ void print_tokens(char **tokens)
   char count = 1;
   printf("\n");
   while (**tokens != '\0') {
-    printf("Token %d: %s\n ",count, *tokens);
+    printf("Token %d: %s\n",count, *tokens);
     *tokens++;
     count++;
   }
+  printf("\n");
 }
 
 void free_tokens(char **tokens)

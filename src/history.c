@@ -54,8 +54,9 @@ void add_history(List *list, char *str)
 void print_history(List *list)
 {
   if (list->root == NULL) {
-    printf("there is no history at this time\n");
+    printf("\nthere is no history at this time\n");
   }else{
+    printf("\n");
     Item *temp = list->root;
     while (temp != NULL){
       printf("id:%d %s", temp->id, temp->str);
@@ -74,5 +75,24 @@ char *get_history(List *list, int id)
     temp = temp->next;
   }
   printf("could not find id\n");
-  return '\0';
+  return NULL;
+}
+
+void free_node(Item *node)
+{
+  if (node == NULL)
+    return;
+  free_node(node->next);
+  free(node->str);
+  free(node);
+  return;
+}
+
+void free_history(List *list)
+{
+  if (list == NULL)
+    return;
+  free_node(list->root);
+  free(list);
+  return;
 }
