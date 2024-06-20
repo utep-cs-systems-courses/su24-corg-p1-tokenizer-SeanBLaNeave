@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <stdio.h>
 #include "tokenizer.h"
 #define LIMIT 100
@@ -8,7 +9,13 @@ int main()
   printf("Please input a word or a sentence\n");
   printf(">");
   fgets(word, LIMIT, stdin);
-  printf("%s", word);
-  printf("%d\n", space_char(word[0]));
+  char **tokenizer = tokenize(word);
+  print_tokens(tokenizer);
+  free_tokens(tokenizer);
+  //char size = count_tokens(&word[0]) + 1;
+  //char *tokenizer = malloc(size * sizeof(char));
+  //for (char i = 0; i < size; i++) {
+  //printf("%c, ", tokenizer[i]);
+  //}
   return 0;
 }
