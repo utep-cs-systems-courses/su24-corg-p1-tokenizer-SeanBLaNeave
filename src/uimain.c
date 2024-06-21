@@ -61,8 +61,9 @@ int main()
  clear:
   free_history(list);
   list = init_history();
-  printf("\n");
+  printf("\nthe data has been cleared\n");
   goto ui;
  quit:
+  free_history(list);
   return 0;
 }
