@@ -9,20 +9,18 @@ int space_char(char c)
  
 int non_space_char(char c)
 {
-  return (c != '\t' && c != ' ' && c != '\n') ? 1 : 0;
+  return (c != '\t' && c != ' ') ? 1 : 0;
 }
 
 int count_tokens(char *str)
 {
-  char size = 0, inWord = 0;
+  int size = 0;
   while (*str != '\0') {
-    if (non_space_char(*str) == 1 && inWord == 0) {
-      inWord = 1;
+    str = token_start(str);
+    if (*str != '\n') {
       size++;
-    }else if (space_char(*str) == 1){
-      inWord = 0;
     }
-    *str++;
+    str = token_terminator(str);
   }
   return size;
 }
@@ -33,16 +31,6 @@ char *token_start(char *s)
     *s++;
   }
   return s;
-}
-
-short token_len(char *str)
-{
-  short size = 0;
-  while (non_space_char(*str) == 1){
-    size++;
-    *str++;
-  }
-  return size;
 }
 
 char *copy_str(char *inStr, short len)
@@ -57,8 +45,10 @@ char *copy_str(char *inStr, short len)
   return token;
 }
 
-char *token_terminator(char *toekn){
-  char *term = malloc(1 * sizeof(char));
-  term[1] = '\0';
-  return term;
+char *token_terminator(char *token)
+{
+  while (*token != '\0' && non_space_char(*token) == 1){
+    *token++;
+  }
+  return token;
 }

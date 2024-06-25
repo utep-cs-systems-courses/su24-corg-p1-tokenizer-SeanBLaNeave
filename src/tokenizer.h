@@ -44,7 +44,4 @@ void print_tokens(char **tokens);
 /* Frees all tokens and the vector containing themx. */
 void free_tokens(char **tokens);
 
-/* for getting the length of the token */
-short token_len(char *str);
-
 #endif

@@ -4,19 +4,20 @@
 
 char **tokenize(char* str)
 {
-  char size = count_tokens(str);
+  int size = count_tokens(str);
   // printf("word count:%d\n", size);
   char **tokenVT = malloc((size + 1) * sizeof(char*));
   for (char i = 0; i < size; i++) {
     char *str_start = token_start(str);
-    short token_size = token_len(str_start);
+    char *token_end = token_terminator(str_start);
     //printf("start of word: %c, size: %d\n", *str_start, token_size);
-    char *token = copy_str(str_start, token_size);
+    char *token = copy_str(str_start, token_end - str_start);
     //printf("%s\n", token);
     tokenVT[i] = token;
-    str += token_size + 1;
+    str = token_end;
   }
-  char *term_token = token_terminator(token_start(str));
+  char *term_token = malloc(1 * sizeof(char));
+  term_token[0] = '\0';
   tokenVT[size] = term_token;
   return tokenVT;
 }
